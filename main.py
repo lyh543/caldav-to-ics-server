@@ -1,4 +1,5 @@
 import json
+from icalendar import Calendar, Event
 
 from caldav import DAVClient
 from flask import Flask
@@ -15,12 +16,22 @@ with open('config.json') as configFile:
     calendar = client.principal().calendar()
 
 
+def merge_ics(ics_list: list):
+    final_ics = Calendar.from_ical(ics_list.pop())
+    for ics in ics_list:
+        cal = Calendar.from_ical(ics)
+        events = list(filter(lambda component: component.name == 'VEVENT', cal.walk()))
+        print(f'adding {len(events)} EVENTS')
+        for event in events:
+            final_ics.add_component(event)
+    return final_ics.to_ical()
+
 
 @app.route('/')
 def get_ics():
-    events = calendar.events()
-    events_data = map(lambda event: event.data, events)
-    return '\r\n'.join(events_data)
+    ics_list = calendar.events()
+    ics_data_list = list(map(lambda event: event.data, ics_list))
+    return merge_ics(ics_data_list)
 
 
 if __name__ == '__main__':
