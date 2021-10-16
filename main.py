@@ -21,7 +21,6 @@ def merge_ics(ics_list: list):
     for ics in ics_list:
         cal = Calendar.from_ical(ics)
         events = list(filter(lambda component: component.name == 'VEVENT', cal.walk()))
-        print(f'adding {len(events)} EVENTS')
         for event in events:
             final_ics.add_component(event)
     return final_ics.to_ical()

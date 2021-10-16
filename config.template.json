@@ -1,5 +1,5 @@
 {
-  "url": "caldav.example.com",
+  "url": "http://caldav.example.com",
   "username": "username",
   "password": "password"
 }
