@@ -27,7 +27,7 @@ def merge_ics(ics_list: list):
     return final_ics.to_ical()
 
 
-@app.route('/')
+@app.route('/caldav.ics')
 def get_ics():
     ics_list = calendar.events()
     ics_data_list = list(map(lambda event: event.data, ics_list))
