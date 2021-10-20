@@ -1,5 +1,7 @@
 # caldav-to-ics-server
 
+**Archived since Google Calendar subscription often fails. [Davx5](https://www.davx5.com/) can sync CalDAV to Android local calendar.**
+
 Convert CalDAV to `ics` file.
 
 You can deploy on your server so that Google Calendar can subscribe it.
